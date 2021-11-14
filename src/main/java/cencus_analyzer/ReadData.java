@@ -10,10 +10,10 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.stream.StreamSupport;
 
+//method to load data
 public class ReadData {
 
     public static void main(String[] args) throws CensusAnalyserException {
-
         String csvFilePath = "D:\\Desk\\ALL\\Day 29\\cencus.csv";
         System.out.println(loadIndiaCensusData(csvFilePath));
     }
@@ -29,6 +29,7 @@ public class ReadData {
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
             Iterator<IndiaCensusCSV> iterator = csvToBean.iterator();
+
             // iterator doesn't consume memory
             Iterable<IndiaCensusCSV> csvIterable = () -> iterator;
             int count = (int) StreamSupport.stream(csvIterable.spliterator(), true).count();
@@ -39,5 +40,4 @@ public class ReadData {
             throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.CENSUS_FILE_INCORRECT);
         }
     }
-
 }
